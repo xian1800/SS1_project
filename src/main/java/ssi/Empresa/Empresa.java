@@ -2,6 +2,7 @@ package ssi.Empresa;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import ssi.Paquete.Paquete;
+import ssi.Utils.Firmador;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
@@ -58,14 +59,8 @@ public class Empresa {
         resumenHash.update(claveSecretaCifrada);
         byte[] resumen = resumenHash.digest();
 
-        //leer nuestra clave privada
-        byte[] clavePrivadaEmpresaBytes = Files.readAllBytes(Paths.get("keys/Empresa.privada"));
-        PrivateKey clavePrivadaEmpresa = generadorClaves.generatePrivate(
-                new PKCS8EncodedKeySpec(clavePrivadaEmpresaBytes)
-        );
 
-        cifradorAsimetrico.init(Cipher.ENCRYPT_MODE, clavePrivadaEmpresa);
-        paquete.anadirBloque("firma", cifradorAsimetrico.doFinal(resumen));
+        paquete.anadirBloque("firma", Firmador.firmar("Empresa", resumen));
         System.out.println("firma añadida");
 
         paquete.escribirPaquete("paquete.pkt");

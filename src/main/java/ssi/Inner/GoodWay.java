@@ -5,7 +5,7 @@ import ssi.Empresa.Empresa;
 import ssi.Hacienda.Hacienda;
 
 public class GoodWay  {
-    public static void main()throws Exception{
+    public static void main(String[] args)throws Exception{
         Empresa.main();
         AutoridadDeSellado.main();
         Hacienda.main();

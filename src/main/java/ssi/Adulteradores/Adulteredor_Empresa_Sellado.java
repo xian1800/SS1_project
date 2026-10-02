@@ -9,13 +9,8 @@ public class Adulteredor_Empresa_Sellado {
 
         Paquete paquete = new Paquete("paquete.pkt");
 
-        byte[] facturaCifrada = paquete.getContenidoBloque("factura cifrada");
-
-        String stringCifrado = new String(facturaCifrada);
-
         System.out.println("------------------ ataque en curso -----------------");
-        System.out.println("Esta es la factura cifrada:");
-        System.out.println(stringCifrado);
+        System.out.println("se altera el contenido cifrado de la factura");
 
         paquete.eliminarBloque("factura cifrada");
         paquete.anadirBloque(
